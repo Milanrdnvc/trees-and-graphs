@@ -12,6 +12,10 @@ FileReader::FileReader(string name) {
     this->stackArray = nullptr;
 }
 
+FileReader::~FileReader() {
+    delete[] stackArray;
+}
+
 FileReader *FileReader::createFileReader(string name)  {
     cnt++;
     if (cnt > 1) return nullptr;

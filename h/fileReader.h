@@ -10,10 +10,11 @@ public:
     static FileReader* createFileReader(string name);
 
     void loadStacks();
+
+    ~FileReader();
 private:
     FileReader(string name);
     FileReader(const FileReader&) = delete;
-
     FileReader& operator=(const FileReader&) = delete;
 
     string name;

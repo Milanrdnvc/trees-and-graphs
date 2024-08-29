@@ -6,10 +6,6 @@
 using namespace std;
 
 class Tree {
-public:
-    void addStackToTree();
-
-private:
     struct Node {
         string f;
         Node* left;
@@ -18,6 +14,16 @@ private:
         Node(string f, Node* left = nullptr, Node* next = nullptr) : f(f), left(left), next(next) {}
     };
 
+public:
+    Tree() = default;
+    Tree(const Tree&) = delete;
+    Tree& operator=(const Tree&) = delete;
+
+    void addStackToTree(string stack);
+    Node* searchLevelOrder(Node* root, string f);
+
+    ~Tree();
+private:
     Node* root = nullptr;
 };
 
