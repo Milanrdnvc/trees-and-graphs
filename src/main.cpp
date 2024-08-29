@@ -1,8 +1,11 @@
 #include <iostream>
+#include "../h/fileReader.h"
 
 int main() {
 
-  std::cout << "hello world" << std::endl;
+  FileReader* fileReader = FileReader::createFileReader("test.txt");
+  fileReader->loadStacks();
+  delete fileReader;
 
   return 0;
 }

@@ -7,10 +7,14 @@ using namespace std;
 
 class FileReader {
 public:
-    FileReader* createFileReader(string name);
+    static FileReader* createFileReader(string name);
 
+    void loadStacks();
 private:
     FileReader(string name);
+    FileReader(const FileReader&) = delete;
+
+    FileReader& operator=(const FileReader&) = delete;
 
     string name;
     string* stackArray;
