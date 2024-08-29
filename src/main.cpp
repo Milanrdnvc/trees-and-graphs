@@ -3,9 +3,12 @@
 
 int main() {
 
-  FileReader* fileReader = FileReader::createFileReader("test.txt");
-  fileReader->loadStacks();
-  delete fileReader;
+  FileReader* stacks = FileReader::createFileReader("test.txt");
+  stacks->loadStacks();
 
+
+
+
+  delete stacks;
   return 0;
 }
