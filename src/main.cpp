@@ -74,6 +74,8 @@ int main() {
         //else cout << "Nema rekurzije" << endl << endl;
         break;
       case 8:
+        delete stackTree;
+        delete stacks;
         return 0;
         break;
       case 0:
