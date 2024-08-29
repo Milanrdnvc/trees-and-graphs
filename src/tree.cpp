@@ -117,3 +117,40 @@ Tree::~Tree() {
 
     root = nullptr;
 }
+
+void Tree::printTree() const {
+    if (!root) return;
+
+    Queue<Node> q;
+    Node* currNode = root;
+
+    q.insertQ(currNode);
+    q.insertQ(nullptr);
+
+    while (q.frontQ() != nullptr) {
+        currNode = q.deleteQ();
+
+        if (currNode->left != nullptr) {
+            q.insertQ(currNode->left);
+        }
+
+        cout << currNode->f << " ";
+
+        Node* curr = currNode->next;
+
+        while (curr) {
+            if (curr->left != nullptr) {
+                q.insertQ(curr->left);
+            }
+            cout << curr->f << " ";
+            curr = curr->next;
+        }
+
+        if (q.frontQ() == nullptr) {
+            q.insertQ(nullptr);
+            q.deleteQ();
+            cout << endl;
+            cout << "-----------" << endl;
+        }
+    }
+}

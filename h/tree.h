@@ -21,6 +21,7 @@ public:
 
     void addStackToTree(string stack);
     Node* searchLevelOrder(Node* root, string f);
+    void printTree() const;
 
     ~Tree();
 private:

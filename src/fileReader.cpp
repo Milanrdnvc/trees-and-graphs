@@ -46,3 +46,13 @@ void FileReader::loadStacks() {
     file.close();
 }
 
+string *FileReader::getStackArray() const {
+    return stackArray;
+}
+
+int FileReader::getStackArrayLen() const {
+    return len;
+}
+
+
+

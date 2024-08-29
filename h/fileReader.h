@@ -8,8 +8,9 @@ using namespace std;
 class FileReader {
 public:
     static FileReader* createFileReader(string name);
-
     void loadStacks();
+    string* getStackArray() const;
+    int getStackArrayLen() const;
 
     ~FileReader();
 private:
