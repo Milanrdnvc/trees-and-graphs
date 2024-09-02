@@ -7,10 +7,20 @@ using namespace std;
 
 class FileReader {
 public:
+    struct StackNode {
+        string stack;
+        StackNode* next;
+        StackNode* prev;
+
+        StackNode(string stack): stack(stack), next(nullptr), prev(nullptr) {}
+    };
+
     static FileReader* createFileReader(string name);
     void loadStacks();
     string* getStackArray() const;
     int getStackArrayLen() const;
+    StackNode* getHead() const;
+    StackNode* getTail() const;
 
     ~FileReader();
 private:
@@ -19,8 +29,8 @@ private:
     FileReader& operator=(const FileReader&) = delete;
 
     string name;
-    string* stackArray;
-    int len;
+    StackNode* head;
+    StackNode* tail;
     static int cnt;
 };
 

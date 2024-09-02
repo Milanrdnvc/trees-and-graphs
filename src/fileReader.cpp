@@ -8,12 +8,19 @@ int FileReader::cnt = 0;
 
 FileReader::FileReader(string name) {
     this->name = name;
-    this->len = -1;
-    this->stackArray = nullptr;
+    this->head = this->tail = nullptr;
 }
 
 FileReader::~FileReader() {
-    delete[] stackArray;
+    StackNode* curr = head;
+
+    while (curr) {
+        StackNode* old = curr;
+        curr = curr->next;
+        delete old;
+    }
+
+    head = tail = nullptr;
 }
 
 FileReader *FileReader::createFileReader(string name)  {
@@ -23,35 +30,38 @@ FileReader *FileReader::createFileReader(string name)  {
 }
 
 void FileReader::loadStacks() {
-    if (len != -1 || stackArray != nullptr) return;
+    if (head) return;
 
     ifstream file(name);
     string stack;
 
     while (getline(file, stack)) {
-        len++;
-    }
-    len++;
+        if (!head) {
+            head = tail = new StackNode(stack);
+            continue;
+        }
 
-    file.close();
-    file.open(name);
+        if (!head->next) {
+            head->next = new StackNode(stack);
+            head->next->prev = head;
+            tail = head->next;
+            continue;
+        }
 
-    stackArray = new string[len];
-    int idx = 0;
-
-    while (getline(file, stack)) {
-        stackArray[idx++] = stack;
+        tail->next = new StackNode(stack);
+        tail->next->prev = tail;
+        tail = tail->next;
     }
 
     file.close();
 }
 
-string *FileReader::getStackArray() const {
-    return stackArray;
+FileReader::StackNode* FileReader::getHead() const {
+    return head;
 }
 
-int FileReader::getStackArrayLen() const {
-    return len;
+FileReader::StackNode* FileReader::getTail() const {
+    return tail;
 }
 
 

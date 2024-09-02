@@ -24,6 +24,7 @@ public:
     void printTree() const;
 
     ~Tree();
+
 private:
     Node* root = nullptr;
 };

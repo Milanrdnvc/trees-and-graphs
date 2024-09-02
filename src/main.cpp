@@ -8,10 +8,11 @@ int main() {
 
   Tree* stackTree = new Tree();
 
-  string* stackArray = stacks->getStackArray();
+  FileReader::StackNode* curr = stacks->getHead();
 
-  for (int i = 0; i < stacks->getStackArrayLen(); i++) {
-    stackTree->addStackToTree(stackArray[i]);
+  while (curr) {
+    stackTree->addStackToTree(curr->stack);
+    curr = curr->next;
   }
 
   string stack;
