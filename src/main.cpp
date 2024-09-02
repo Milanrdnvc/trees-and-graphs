@@ -7,16 +7,12 @@ int main() {
   stacks->loadStacks();
 
   Tree* stackTree = new Tree();
-
-  FileReader::StackNode* curr = stacks->getHead();
-
-  while (curr) {
-    stackTree->addStackToTree(curr->stack);
-    curr = curr->next;
-  }
+  FileReader::StackNode* head = stacks->getHead();
+  stackTree->addStacksToTree(head);
 
   string stack;
   int op;
+  bool removed;
 
   while (true) {
     cout << "Unesite zeljenu operaciju: " << endl;
@@ -43,10 +39,14 @@ int main() {
         cout << "Unesite programski stek u formatu: main f-ja(1) f-ja(2) ... f-ja(n)" << endl << endl;
         cin.ignore();
         getline(cin, stack);
-        if (stackTree) stackTree->addStackToTree(stack);
+        if (stackTree) {
+          stackTree->addStackToTree(stack);
+          stackTree->addStackToLinkedList(stack);
+        }
         else {
           stackTree = new Tree();
           stackTree->addStackToTree(stack);
+          stackTree->addStackToLinkedList(stack);
         }
         break;
       case 3:
@@ -54,7 +54,11 @@ int main() {
         cout << "Unesite programski stek u formatu: main f-ja(1) f-ja(2) ... f-ja(n)" << endl << endl;
         cin.ignore();
         getline(cin, stack);
-        //removeStackFromTree(root, stack);
+        if (stackTree) {
+          removed = stackTree->removeStackFromLinkedList(stack);
+          if (!removed) break;
+          stackTree->rebuildTree();
+        }
         break;
       case 4:
         delete stackTree;

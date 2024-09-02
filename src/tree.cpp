@@ -79,6 +79,84 @@ void Tree::addStackToTree(string stack) {
     }
 }
 
+void Tree::addStacksToTree(FileReader::StackNode *head) {
+    if (!head) return;
+
+    this->head = head;
+    FileReader::StackNode* curr = head;
+
+    while (curr->next) {
+        addStackToTree(curr->stack);
+        curr = curr->next;
+    }
+    addStackToTree(curr->stack);
+    this->tail = curr;
+}
+
+void Tree::addStackToLinkedList(string stack) {
+    if (!head) {
+        head = tail = new FileReader::StackNode(stack);
+        return;
+    }
+
+    if (!head->next) {
+        head->next = new FileReader::StackNode(stack);
+        head->next->prev = head;
+        tail = head->next;
+        return;
+    }
+
+    tail->next = new FileReader::StackNode(stack);
+    tail->next->prev = tail;
+    tail = tail->next;
+}
+
+bool Tree::removeStackFromLinkedList(string stack) {
+    if (!head) return false;
+    bool found = false;
+
+    FileReader::StackNode* curr = head;
+
+    while (curr) {
+        if (curr->stack == stack) {
+            found = true;
+            break;
+        }
+        curr = curr->next;
+    }
+
+    if (!found) return false;
+
+    if (curr == head) {
+        FileReader::StackNode* old = head;
+        head = curr->next;
+        if (head) head->prev = nullptr;
+        else head = tail = nullptr;
+        delete old;
+        return true;
+    }
+
+    if (curr == tail) {
+        FileReader::StackNode* old = tail;
+        tail = curr->prev;
+        if (tail) tail->next = nullptr;
+        else head = nullptr;
+        delete old;
+        return true;
+    }
+
+    FileReader::StackNode* old = curr;
+    curr->prev->next = curr->next;
+    curr->next->prev = curr->prev;
+    delete old;
+    return true;
+}
+
+void Tree::rebuildTree() {
+    freeTree();
+    addStacksToTree(head);
+}
+
 void Tree::printTree() const {
     if (!root) return;
 
@@ -116,7 +194,7 @@ void Tree::printTree() const {
     }
 }
 
-Tree::~Tree() {
+void Tree::freeTree() {
     if (!root) return;
 
     Queue<Node> q;
@@ -153,4 +231,8 @@ Tree::~Tree() {
     }
 
     root = nullptr;
+}
+
+Tree::~Tree() {
+    freeTree();
 }

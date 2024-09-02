@@ -2,6 +2,7 @@
 #define _tree_h_
 
 #include <iostream>
+#include "../h/fileReader.h"
 
 using namespace std;
 
@@ -20,6 +21,11 @@ public:
     Tree& operator=(const Tree&) = delete;
 
     void addStackToTree(string stack);
+    void addStacksToTree(FileReader::StackNode* head);
+    void addStackToLinkedList(string stack);
+    bool removeStackFromLinkedList(string stack);
+    void rebuildTree();
+    void freeTree();
     Node* searchLevelOrder(Node* root, string f);
     void printTree() const;
 
@@ -27,6 +33,8 @@ public:
 
 private:
     Node* root = nullptr;
+    FileReader::StackNode* head = nullptr;
+    FileReader::StackNode* tail = nullptr;
 };
 
 #endif
