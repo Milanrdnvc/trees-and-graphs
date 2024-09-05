@@ -15,6 +15,8 @@ class Tree {
         Node(string f, Node* left = nullptr, Node* next = nullptr) : f(f), left(left), next(next) {}
     };
 
+    friend class Graph;
+
 public:
     Tree() = default;
     Tree(const Tree&) = delete;
