@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../h/fileReader.h"
 #include "../h/tree.h"
+#include "../h/graph.h"
 
 int main() {
   FileReader* stacks = FileReader::createFileReader("test.txt");
@@ -9,6 +10,8 @@ int main() {
   Tree* stackTree = new Tree();
   FileReader::StackNode* head = stacks->getHead();
   stackTree->addStacksToTree(head);
+
+  Graph* stackGraph = new Graph();
 
   string stack;
   int op;
@@ -65,11 +68,13 @@ int main() {
         stackTree = nullptr;
         break;
       case 5:
-        //startNode = convertTreeToGraph(root);
+        if (stackTree && stackTree->getRoot()) {
+          stackGraph->convertTreeToGraph(stackTree->getRoot());
+        }
         break;
       case 6:
         cout << endl;
-        //printGraph(startNode);
+        stackGraph->printGraph();
         cout << endl;
         break;
       case 7:

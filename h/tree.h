@@ -30,6 +30,7 @@ public:
     void freeTree();
     Node* searchLevelOrder(Node* root, string f);
     void printTree() const;
+    Node* getRoot() const;
 
     ~Tree();
 

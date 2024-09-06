@@ -233,6 +233,10 @@ void Tree::freeTree() {
     root = nullptr;
 }
 
+Tree::Node* Tree::getRoot() const {
+    return root;
+}
+
 Tree::~Tree() {
     freeTree();
 }

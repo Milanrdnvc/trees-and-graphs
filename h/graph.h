@@ -25,7 +25,7 @@ public:
     Node* addToAhl(Node* head, string f);
     Node* addToAl(Node* head, string f);
     bool existsInAl(Node* head, string f);
-    void printGraph(Node* head) const;
+    void printGraph() const;
 
     ~Graph();
 

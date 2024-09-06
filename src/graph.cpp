@@ -55,16 +55,16 @@ Graph::Node *Graph::addToAl(Node *head, string f) {
         curr->next = new Node(f, nullptr, nullptr);
         return curr->next;
     }
+
+    return nullptr;
 }
 
 
 void Graph::convertTreeToGraph(Tree::Node *root) {
-    if (!root) return;
+    if (!root || ahlHead) return;
 
     Node* headAdj = nullptr;
-
     Queue<Tree::Node> q;
-
     Tree::Node* currNode = root;
 
     q.insertQ(currNode);
@@ -109,6 +109,7 @@ void Graph::convertTreeToGraph(Tree::Node *root) {
 
             currSibling = currSibling->next;
         }
+
         if (q.frontQ() == nullptr) {
             q.insertQ(nullptr);
             q.deleteQ();
@@ -118,8 +119,8 @@ void Graph::convertTreeToGraph(Tree::Node *root) {
     ahlHead = headAdj;
 }
 
-void Graph::printGraph(Node *head) const {
-    Node* curr = head;
+void Graph::printGraph() const {
+    Node* curr = ahlHead;
 
     while (curr) {
         cout << curr->f << " ";
