@@ -138,3 +138,24 @@ void Graph::printGraph() const {
     }
 }
 
+Graph::~Graph() {
+    Node* curr = ahlHead;
+
+    while (curr) {
+        Node* currAl = curr->head;
+
+        while (currAl) {
+            Node* old = currAl;
+            currAl = currAl->next;
+            delete old;
+        }
+
+        Node* old = curr;
+        curr = curr->next;
+        delete old;
+    }
+
+    ahlHead = nullptr;
+}
+
+

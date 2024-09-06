@@ -85,6 +85,7 @@ int main() {
         break;
       case 8:
         delete stackTree;
+        delete stackGraph;
         delete stacks;
         return 0;
         break;
@@ -100,6 +101,8 @@ int main() {
   }
 
   delete stackTree;
+  delete stackGraph;
   delete stacks;
+
   return 0;
 }
