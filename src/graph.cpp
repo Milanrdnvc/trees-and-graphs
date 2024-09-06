@@ -23,7 +23,6 @@ bool Graph::existsInAl(Node *head, string f) {
     return false;
 }
 
-
 Graph::Node *Graph::addToAhl(Node *head, string f) {
     Node* curr = head;
 
@@ -118,3 +117,13 @@ void Graph::convertTreeToGraph(Tree::Node *root) {
 
     ahlHead = headAdj;
 }
+
+void Graph::printGraph(Node *head) const {
+    Node* curr = head;
+
+    while (curr) {
+        cout << curr->f << " ";
+        curr = curr->next;
+    }
+}
+
