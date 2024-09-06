@@ -74,7 +74,7 @@ int main() {
         break;
       case 6:
         cout << endl;
-        stackGraph->printGraph();
+        if (stackGraph) stackGraph->printGraph();
         cout << endl;
         break;
       case 7:
