@@ -123,7 +123,17 @@ void Graph::printGraph() const {
     Node* curr = ahlHead;
 
     while (curr) {
-        cout << curr->f << " ";
+        cout << curr->f << " | ";
+
+        Node* currAl = curr->head;
+
+        while (currAl) {
+            cout << currAl->f;
+            if (currAl->next) cout << " -> ";
+            currAl = currAl->next;
+        }
+
+        cout << "\n";
         curr = curr->next;
     }
 }
