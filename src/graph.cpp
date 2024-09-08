@@ -1,5 +1,6 @@
 #include "../h/graph.h"
 #include "../h/queue.h"
+#include "../h/stack.h"
 
 Graph::Node* Graph::existsInAhl(Node *head, string f) {
     Node* curr = head;
@@ -142,9 +143,81 @@ Graph::Node *Graph::getAhlHead() const {
     return ahlHead;
 }
 
-bool Graph::hasRecursion() const {
+int Graph::getAhlLen() const {
+    Node* curr = ahlHead;
+    int cnt = 0;
 
-    return false;
+    while (curr) {
+        cnt++;
+        curr = curr->next;
+    }
+
+    return cnt;
+}
+
+
+bool Graph::hasCycle() const {
+     struct NodeFlagPair {
+         Node* node;
+         int idx;
+         bool visited;
+
+         NodeFlagPair(Node* node = nullptr, int idx = -1, bool visited = false) : node(node), idx(idx), visited(visited) {}
+     };
+
+     int ahlLen = getAhlLen();
+
+     NodeFlagPair* visited = new NodeFlagPair[ahlLen];
+     NodeFlagPair* pathVisited = new NodeFlagPair[ahlLen];
+
+     Node* curr = ahlHead;
+     for (int i = 0; i < getAhlLen() && curr; i++) {
+         pathVisited[i].node = visited[i].node = curr;
+         pathVisited[i].idx = visited[i].idx = i;
+         curr = curr->next;
+     }
+
+     Stack<NodeFlagPair> s;
+
+     s.push(&visited[0]);
+
+     while (!s.emptyS()) {
+         NodeFlagPair* v = s.pop();
+
+         if (pathVisited[v->idx].visited == true) {
+             delete[] visited;
+             delete[] pathVisited;
+             return true;
+         }
+
+         if (!visited[v->idx].visited) {
+             visited[v->idx].visited = true;
+             pathVisited[v->idx].visited = true;
+
+             Node* curr = visited[v->idx].node->head;
+             while (curr) {
+                 for (int i = 0; i < getAhlLen(); i++) {
+                     if (curr->f == visited[i].node->f) {
+                         if (!visited[i].visited) {
+                             s.push(&visited[i]);
+                         } else if (pathVisited[i].visited) {
+                             delete[] visited;
+                             delete[] pathVisited;
+                             return true;
+                         }
+                         break;
+                     }
+                 }
+                 curr = curr->next;
+             }
+         }
+
+         pathVisited[v->idx].visited = false;
+     }
+
+     delete[] visited;
+     delete[] pathVisited;
+     return false;
 }
 
 Graph::~Graph() {

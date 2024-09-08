@@ -29,7 +29,6 @@ public:
 template<typename T>
 void Stack<T>::push(T *node) {
     Node* newNode = new Node(node, nullptr, nullptr);
-    Node* curr = head;
 
     if (head == nullptr) {
         head = newNode;
@@ -37,12 +36,8 @@ void Stack<T>::push(T *node) {
         return;
     }
 
-    while (curr->next != nullptr) {
-        curr = curr->next;
-    }
-
-    curr->next = newNode;
-    newNode->prev = curr;
+    tail->next = newNode;
+    newNode->prev = tail;
     tail = newNode;
 }
 

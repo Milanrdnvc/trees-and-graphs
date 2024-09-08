@@ -2,6 +2,7 @@
 #include "../h/fileReader.h"
 #include "../h/tree.h"
 #include "../h/graph.h"
+#include "../h/stack.h"
 
 int main() {
   FileReader* stacks = FileReader::createFileReader("test.txt");
@@ -80,7 +81,7 @@ int main() {
       case 7:
         cout << endl;
         if (!stackGraph || !stackGraph->getAhlHead()) break;
-        if (stackGraph->hasRecursion()) cout << "Ima rekurzije" << endl << endl;
+        if (stackGraph->hasCycle()) cout << "Ima rekurzije" << endl << endl;
         else cout << "Nema rekurzije" << endl << endl;
         break;
       case 8:

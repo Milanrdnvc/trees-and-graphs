@@ -26,8 +26,9 @@ public:
     Node* addToAl(Node* head, string f);
     bool existsInAl(Node* head, string f);
     void printGraph() const;
-    bool hasRecursion() const;
+    bool hasCycle() const;
     Node* getAhlHead() const;
+    int getAhlLen() const;
 
     ~Graph();
 
