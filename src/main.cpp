@@ -34,7 +34,7 @@ int main() {
     switch (op) {
       case 1:
         cout << endl;
-        if (stackTree) stackTree->printTree();
+        if (stackTree && stackTree->getRoot()) stackTree->printTree();
         cout << endl;
         break;
       case 2:
@@ -57,7 +57,7 @@ int main() {
         cout << "Unesite programski stek u formatu: main f-ja(1) f-ja(2) ... f-ja(n)" << endl << endl;
         cin.ignore();
         getline(cin, stack);
-        if (stackTree) {
+        if (stackTree && stackTree->getRoot()) {
           removed = stackTree->removeStackFromLinkedList(stack);
           if (!removed) break;
           stackTree->rebuildTree();
@@ -74,14 +74,14 @@ int main() {
         break;
       case 6:
         cout << endl;
-        if (stackGraph) stackGraph->printGraph();
+        if (stackGraph && stackGraph->getAhlHead()) stackGraph->printGraph();
         cout << endl;
         break;
       case 7:
         cout << endl;
-        //cycle = hasRecursion(startNode);
-        //if (cycle) cout << "Ima rekurzije" << endl << endl;
-        //else cout << "Nema rekurzije" << endl << endl;
+        if (!stackGraph || !stackGraph->getAhlHead()) break;
+        if (stackGraph->hasRecursion()) cout << "Ima rekurzije" << endl << endl;
+        else cout << "Nema rekurzije" << endl << endl;
         break;
       case 8:
         delete stackTree;

@@ -138,6 +138,14 @@ void Graph::printGraph() const {
     }
 }
 
+Graph::Node *Graph::getAhlHead() const {
+    return ahlHead;
+}
+
+bool Graph::hasRecursion() const {
+    return false;
+}
+
 Graph::~Graph() {
     Node* curr = ahlHead;
 
