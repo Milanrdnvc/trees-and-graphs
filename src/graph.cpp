@@ -143,6 +143,7 @@ Graph::Node *Graph::getAhlHead() const {
 }
 
 bool Graph::hasRecursion() const {
+
     return false;
 }
 
