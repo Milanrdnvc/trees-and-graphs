@@ -13,7 +13,7 @@ This project involves implementing basic data structures and operations on them.
 ### Key Features:
 - **Stack**: Implementation of a stack data structure with push, pop and peek operations.
 - **Queue**: Implementation of a queue data structure with insert, delete and front operations.
-- **Tree**: Implementation of a n-ary tree that is represented in memory as a binary using an efficient technique with level-order traversal .
+- **Tree**: Implementation of a n-ary tree that is represented in memory as a binary using an efficient technique with level-order traversal.
 - **Graph**: Converting n-ary tree to a graph representation and detecting cycles in it using DFS traversal.
 
 ## Installation
